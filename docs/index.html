@@ -4,42 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRIC Codec – verlustfreier Bild- und Videocodec</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background-color: #f8f8f8;
-      color: #222;
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem;
-      line-height: 1.6;
-    }
-    h1, h2 {
-      color: #004080;
-    }
-    code {
-      background-color: #eee;
-      padding: 2px 4px;
-      border-radius: 3px;
-    }
-    .button {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      margin-top: 1rem;
-      background-color: #0077cc;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-    }
-    .button.donate {
-      background-color: #28a745;
-    }
-    footer {
-      margin-top: 3rem;
-      font-size: 0.9em;
-      color: #666;
-    }
-  </style>
+  <link rel="stylesheet" href="static/index.css">
 </head>
 <body>
   <h1>CRIC Codec</h1>
@@ -48,4 +13,29 @@
   <h2>🔧 Dateiformate</h2>
   <ul>
     <li><code>.cig</code> – CRIC Image Format (Einzelbilder)</li>
-    <
+    <li><code>.cgv</code> – CRIC Gray Video Format (Videos / Streams)</li>
+  </ul>
+
+  <h2>🚀 Vorteile</h2>
+  <ul>
+    <li>100 % verlustfrei</li>
+    <li>Lineare Verarbeitungsgeschwindigkeit (O(n))</li>
+    <li>Ideal für Kamerastreams, Embedded Vision, Low-Latency-Systeme</li>
+    <li>Kein Entropie-Overhead, keine Huffman-Tabellen</li>
+  </ul>
+
+  <h2>📥 Download</h2>
+  <p><a class="button" href="https://github.com/Stormyshome/cig-cgv-codec/releases">CRIC Encoder/Decoder herunterladen</a></p>
+
+  <h2>📄 Dokumentation</h2>
+  <p>Technische Details findest du hier: <a href="https://github.com/Stormyshome/cig-cgv-codec/blob/main/docs/spec.md">spec.md</a></p>
+
+  <h2>💰 Unterstützen</h2>
+  <p>Hilf mit, dieses Projekt weiterzuentwickeln:</p>
+  <p><a class="button donate" href="https://paypal.me/Stormyshome">Jetzt via PayPal spenden</a></p>
+
+  <footer>
+    Made with 💡 by Chris · <a href="https://github.com/Stormyshome/cig-cgv-codec">Projekt auf GitHub</a>
+  </footer>
+</body>
+</html>
