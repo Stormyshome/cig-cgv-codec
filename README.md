@@ -4,8 +4,8 @@ Willkommen beim offiziellen Repository des **CRIC-Codecs** – einem extrem schn
 
 ## 🔧 Dateiendungen
 
-- \`\` – CRIC Image Format (für Einzelbilder)
-- \`\` – CRIC Gray Video Format (für Videostreams oder Bildfolgen)
+- \`cig\` – CRIC Image Format (für Einzelbilder)
+- \`cgv\` – CRIC Gray Video Format (für Videostreams oder Bildfolgen)
 
 ## 🚀 Vorteile
 
