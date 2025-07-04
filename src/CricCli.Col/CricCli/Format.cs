@@ -1,4 +1,4 @@
-+namespace CricCli
+namespace CricCli
 {
     public enum ImageFormat
     {

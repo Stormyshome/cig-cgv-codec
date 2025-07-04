@@ -1,5 +1,7 @@
 using Xunit;
 using System.IO;
+using System.Drawing.Imaging;
+using CricCli.tests;
 
 namespace CricCli.Tests
 {
