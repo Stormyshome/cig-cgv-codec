@@ -2,9 +2,10 @@
 using System.IO;
 using System.Linq;
 using Xunit;
-using CricCli.tests;
+using CricCli;
+using CricCli.Tests;
 
-namespace CricCli.Tests
+namespace CricCl.Tests
 {
     public class EncodeTests
     {
@@ -33,6 +34,7 @@ namespace CricCli.Tests
 
             // Assert
             Assert.NotEmpty(encodedBytes);
+            Assert.True(result.IsLossless, $"Kodierung für {format} ist nicht verlustfrei. Erwartet: {rawData.Length} Bytes, erhalten: {encodedBytes.Length} Bytes.");
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace CricCli.tests
+namespace CricCli.Tests
 {
     public static class RawTestImageBuilder
     {

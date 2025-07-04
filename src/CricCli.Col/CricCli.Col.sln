@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CricCli", "CricCli\CricCli.csproj", "{37A41E81-0E38-D994-082A-3EEE58E7FA4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CricCli.Tests", "CricCli.Tests\CricCli.Tests.csproj", "{61F33B96-9325-1B2B-E18A-E07AA08AC7AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CricCli_Tests", "CricCli.Tests\CricCli_Tests.csproj", "{61F33B96-9325-1B2B-E18A-E07AA08AC7AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
