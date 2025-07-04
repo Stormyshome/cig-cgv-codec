@@ -5,7 +5,6 @@ namespace CricCli.Tests
     public class CodecTestResult
     {
         public ImageFormat Format { get; set; } = ImageFormat.RawRGBA;
-        public string ImageType { get; set; } = string.Empty;
         public int Width { get; set; }
         public int Height { get; set; }
 
@@ -21,7 +20,7 @@ namespace CricCli.Tests
 
         public override string ToString()
         {
-            return $"{Format} | {ImageType} | {Width}x{Height} | CR: {CompressionRatio:P2} | Lossless: {IsLossless} | Encode: {EncodeTime.TotalMilliseconds:F1} ms | Decode: {DecodeTime.TotalMilliseconds:F1} ms";
+            return $"{Format} | {Width}x{Height} | CR: {CompressionRatio:P2} | Lossless: {IsLossless} | Encode: {EncodeTime.TotalMilliseconds:F1} ms | Decode: {DecodeTime.TotalMilliseconds:F1} ms";
         }
     }
 

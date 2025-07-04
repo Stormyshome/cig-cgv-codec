@@ -19,7 +19,7 @@ namespace CricCli.Tests
 
             foreach (var r in results)
             {
-                lines.Add($"{r.Format},{r.ImageType},{r.Width}x{r.Height},{r.OriginalSizeBytes},{r.EncodedSizeBytes},{r.DecodedSizeBytes},{r.CompressionRatio:F3},{r.IsLossless},{r.EncodeTime.TotalMilliseconds:F1},{r.DecodeTime.TotalMilliseconds:F1}");
+                lines.Add($"{r.Format},{r.Width}x{r.Height},{r.OriginalSizeBytes},{r.EncodedSizeBytes},{r.DecodedSizeBytes},{r.CompressionRatio:F3},{r.IsLossless},{r.EncodeTime.TotalMilliseconds:F1},{r.DecodeTime.TotalMilliseconds:F1}");
             }
 
             File.WriteAllLines(outputPath, lines);
@@ -29,7 +29,7 @@ namespace CricCli.Tests
         {
             foreach (var r in results)
             {
-                Console.WriteLine ($"{r.Format},{r.ImageType},{r.Width}x{r.Height},{r.OriginalSizeBytes},{r.EncodedSizeBytes},{r.DecodedSizeBytes},{r.CompressionRatio:F3},{r.IsLossless},{r.EncodeTime.TotalMilliseconds:F1},{r.DecodeTime.TotalMilliseconds:F1}");
+                Console.WriteLine ($"{r.Format},{r.Width}x{r.Height},{r.OriginalSizeBytes},{r.EncodedSizeBytes},{r.DecodedSizeBytes},{r.CompressionRatio:F3},{r.IsLossless},{r.EncodeTime.TotalMilliseconds:F1},{r.DecodeTime.TotalMilliseconds:F1}");
             }
         }
     }

@@ -10,7 +10,7 @@ namespace CricCli.Tests
     {
         [Theory]
         [MemberData(nameof(TestMatrix.AllCases), MemberType = typeof(TestMatrix))]
-        public void RunDecodeTest(ImageFormat format, string imageType, int width, int height, byte[] rawData)
+        public void RunDecodeTest(ImageFormat format, int width, int height, byte[] rawData)
         {
             var encodedBytes = Encoder.Encode(rawData, format);
 
@@ -34,7 +34,6 @@ namespace CricCli.Tests
             var result = new CodecTestResult
             {
                 Format = format,
-                ImageType = imageType,
                 Width = width,
                 Height = height,
                 OriginalSizeBytes = rawData.Length,
@@ -44,7 +43,7 @@ namespace CricCli.Tests
                 DecodeTime = sw.Elapsed
             };
 
-            Assert.True(isLossless, $"Decode failed: Not lossless for {imageType} {width}x{height}");
+            Assert.True(isLossless, $"Decode failed: Not lossless for {format} {width}x{height}");
         }
     }
 }

@@ -11,9 +11,10 @@ namespace CricCl.Tests
     {
         [Theory]
         [MemberData(nameof(TestMatrix.AllCases), MemberType = typeof(TestMatrix))]
-        public void RunEncodeTest(ImageFormat format, string imageType, int width, int height, byte[] rawData)
+        public void RunEncodeTest(ImageFormat format, int width, int height, TestPattern pattern, double expectedReduction)
         {
             // Arrange
+            byte[] rawData = RawTestImageBuilder.CreateTestImage(width, height, format, pattern);
             var sw = Stopwatch.StartNew();
             var encodedBytes = Encoder.Encode(rawData, format);
             sw.Stop();
@@ -21,7 +22,6 @@ namespace CricCl.Tests
             var result = new CodecTestResult
             {
                 Format = format,
-                ImageType = imageType,
                 Width = width,
                 Height = height,
                 OriginalSizeBytes = rawData.Length,
