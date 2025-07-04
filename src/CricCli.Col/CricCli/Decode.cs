@@ -10,8 +10,14 @@ namespace CricCli
             Console.WriteLine($"[Decoder] Dekodieren: {inputPath} → {outputPath} ({format})");
 
             byte[] input = File.ReadAllBytes(inputPath);
-            using var output = new FileStream(outputPath, FileMode.Create);
+            using var output = Decode(input, format, new FileStream(outputPath, FileMode.Create));
+            output.Flush();
+            output.Close();
+            Console.WriteLine("[Decoder] Fertig.");
+        }
 
+        public static FileStream Decode(byte[] input, ImageFormat format, FileStream fs)
+        {
             int pixelSize = format switch
             {
                 ImageFormat.RawRGBA => 4,
@@ -19,7 +25,6 @@ namespace CricCli
                 ImageFormat.RawGray8 => 1,
                 _ => throw new NotSupportedException($"Format {format} nicht unterstützt")
             };
-
             int i = 0;
             while (i < input.Length)
             {
@@ -31,18 +36,49 @@ namespace CricCli
                         Console.WriteLine("[Decoder] Warnung: unvollständige Rohdaten, Abbruch.");
                         break;
                     }
-
-                    output.Write(input, i, pixelSize);
+                    fs.Write(input, i, pixelSize);
                     i += pixelSize;
                 }
                 else
                 {
                     for (int j = 0; j < pixelSize; j++)
-                        output.WriteByte(b);
+                        fs.WriteByte(b);
                 }
             }
+            return fs;
+        }
 
-            Console.WriteLine("[Decoder] Fertig.");
+        public static byte[] Decode(byte[] input, ImageFormat format)
+        {
+            using var ms = new MemoryStream();
+            int pixelSize = format switch
+            {
+                ImageFormat.RawRGBA => 4,
+                ImageFormat.RawRGB => 3,
+                ImageFormat.RawGray8 => 1,
+                _ => throw new NotSupportedException($"Format {format} nicht unterstützt")
+            };
+            int i = 0;
+            while (i < input.Length)
+            {
+                byte b = input[i++];
+                if (b == 0xFF)
+                {
+                    if (i + pixelSize - 1 >= input.Length)
+                    {
+                        Console.WriteLine("[Decoder] Warnung: unvollständige Rohdaten, Abbruch.");
+                        break;
+                    }
+                    ms.Write(input, i, pixelSize);
+                    i += pixelSize;
+                }
+                else
+                {
+                    for (int j = 0; j < pixelSize; j++)
+                        ms.WriteByte(b);
+                }
+            }
+            return ms.ToArray();
         }
     }
 }

@@ -4,8 +4,12 @@ namespace CricCli
     {
         RawRGBA,   // 4 Bytes/Pixel
         RawRGB,    // 3 Bytes/Pixel
-        RawGray8,  // 1 Byte/Pixel
-        Png,       // Geplant (später)
-        Bmp        // Geplant (später)
+        RawGray8  // 1 Byte/Pixel
+    }
+
+    public enum NotSupportedYetButPlanned
+    {
+        Png,       // Geplant für zukünftige Implementierung
+        Bmp        // Geplant für zukünftige Implementierung
     }
 }

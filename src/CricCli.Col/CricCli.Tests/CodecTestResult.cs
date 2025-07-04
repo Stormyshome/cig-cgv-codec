@@ -4,7 +4,7 @@ namespace CricCli.Tests
 {
     public class CodecTestResult
     {
-        public string Format { get; set; } = string.Empty;
+        public ImageFormat Format { get; set; } = ImageFormat.RawRGBA;
         public string ImageType { get; set; } = string.Empty;
         public int Width { get; set; }
         public int Height { get; set; }
