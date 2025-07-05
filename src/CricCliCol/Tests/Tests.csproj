@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CricCli\CricCli.csproj" />
+    <ProjectReference Include="..\Codec\Codec.csproj" />
   </ItemGroup>
 
   <ItemGroup>

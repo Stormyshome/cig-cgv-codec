@@ -40,48 +40,55 @@ namespace CricCli
             }
             return fs;
         }
-
         public static byte[] Decode(byte[] input)
         {
             using var inputStream = new MemoryStream(input);
             using var output = new MemoryStream();
 
-            // Header lesen
-            if ((ByteMarker)inputStream.ReadByte() != ByteMarker.cig)
-                throw new InvalidDataException("Invalid header");
+            // 🧠 Header lesen (enthält Magic, Version, Width, Height, PixelSize, Startindex)
+            ImageHeader header = ImageHeaderHelper.ReadHeader(inputStream);
 
-            byte version = (byte)inputStream.ReadByte();
-            byte pixelSize = (byte)inputStream.ReadByte();
+            if (header.Magic != (byte)ByteMarker.cig)
+                throw new InvalidDataException("Unknown or unsupported format");
+
+            int pixelSize = header.PixelSize;
+
+            // Setze Position auf DataStartIndex, damit wir direkt bei den Bilddaten starten
+            inputStream.Position = header.DataStartIndex;
 
             while (inputStream.Position < inputStream.Length)
             {
-                ByteMarker marker = (ByteMarker)inputStream.ReadByte();
+                byte marker = (byte)inputStream.ReadByte();
 
-                switch (marker)
+                switch ((ByteMarker)marker)
                 {
                     case ByteMarker.std:
-                        byte gray = (byte)inputStream.ReadByte();
-                        for (int i = 0; i < pixelSize; i++)
-                            output.WriteByte(gray);
+                        byte[] stdPixel = ReadBytes(inputStream, pixelSize);
+                        output.Write(stdPixel, 0, pixelSize);
                         break;
 
                     case ByteMarker.rle:
                     case ByteMarker.rle2:
                         int count = inputStream.ReadByte();
-                        byte[] color = marker == ByteMarker.rle
-                            ? new byte[] { (byte)inputStream.ReadByte() }
+                        byte[] color = marker == (byte)ByteMarker.rle
+                            ? new byte[pixelSize].Select(_ => inputStream.ReadByte()).ToArray()
                             : ReadBytes(inputStream, pixelSize);
                         for (int i = 0; i < count; i++)
-                        {
-                            if (color.Length == 1)
-                                output.WriteByte(color[0]);
-                            else
-                                output.Write(color, 0, pixelSize);
-                        }
+                            output.Write(color, 0, pixelSize);
                         break;
 
                     default:
-                        throw new InvalidDataException($"Unknown or unsupported marker: {marker:X2}");
+                        // 📌 Kein Marker – also: entweder Einzelpixel (gleiche RGB) oder Datenfehler
+                        if (marker <= 0xF0)  // Nur wenn sinnvoll definiert
+                        {
+                            for (int j = 0; j < pixelSize; j++)
+                                output.WriteByte(marker);
+                        }
+                        else
+                        {
+                            throw new InvalidDataException($"Unknown or unsupported marker: 0x{marker:X2}");
+                        }
+                        break;
                 }
             }
 

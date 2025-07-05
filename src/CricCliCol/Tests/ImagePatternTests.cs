@@ -7,11 +7,11 @@ using CricCli.Tests;
 
 namespace CricCl.Tests
 {
-    public class EncodeTests
+    public class ImagePatternTests
     {
         [Theory]
         [MemberData(nameof(TestMatrix.AllCases), MemberType = typeof(TestMatrix))]
-        public void RunEncodeTest(ImageFormat format, int width, int height, TestPattern pattern, double expectedReduction)
+        public void RunTest(ImageFormat format, int width, int height, TestPattern pattern, double expectedReduction)
         {
             // Arrange
             byte[] rawData = RawTestImageBuilder.CreateTestImage(width, height, format, pattern);

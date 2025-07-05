@@ -48,22 +48,32 @@ namespace CricCli
                 if (runLength >= 3)
                 {
                     bool compressed = IsSingleByteColor(input, i, pixelSize);
-                    output.WriteByte((byte)(compressed ? ByteMarker.rle : ByteMarker.rle2));
-                    output.WriteByte((byte)runLength);
                     if (compressed)
-                        output.WriteByte(input[i]); // nur 1 Byte
+                    {
+                        output.WriteByte((byte)ByteMarker.rle);
+                        output.WriteByte((byte)runLength);
+                        output.WriteByte(input[i]);
+                    }
                     else
-                        output.Write(input, i, pixelSize); // voller Farbwert
+                    {
+                        output.WriteByte((byte)ByteMarker.rle2);
+                        output.WriteByte((byte)runLength);
+                        output.Write(input, i, pixelSize);
+                    }
                     i += runLength * pixelSize;
                 }
                 else
                 {
                     bool compressed = IsSingleByteColor(input, i, pixelSize);
                     if (compressed)
-                        output.WriteByte(input[i]);
+                    {
+                        output.WriteByte(input[i]);  // Nur 1 Byte, z. B. Grau
+                    }
                     else
+                    {
                         output.WriteByte((byte)ByteMarker.std);
                         output.Write(input, i, pixelSize);
+                    }
                     i += pixelSize;
                 }
             }

@@ -34,11 +34,21 @@ namespace CricCli
                 Width = (ushort)width,
                 Height = (ushort)height,
                 PixelSize = (byte)FormatHelper.FormatToPixelSize[format],
-                DataStartIndex = FormatHelper.HeaderSize,
+                DataStartIndex = Header.GetSize(),
                 FirstStdIndex = -1, // Not set yet
                 Reserved = 0 // Reserved for future use
             };
             Data = new byte[width * height * FormatHelper.FormatToPixelSize[format]];
         }
+        public override string ToString()
+        {
+            return $"Image {Header.Width}x{Header.Height}, PixelSize: {Header.PixelSize}, Format: {Header.Version}, DataLength: {Data.Length}";
+        }
+        public bool IsValidSize()
+        {
+            int expectedSize = Header.Width * Header.Height * Header.PixelSize;
+            return Data != null && Data.Length == expectedSize;
+        }
+
     }
 }

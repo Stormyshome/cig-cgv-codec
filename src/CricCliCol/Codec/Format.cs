@@ -16,7 +16,6 @@ namespace CricCli
     public static class FormatHelper
     {
         public const byte Version = 0x01; // Version 1.0
-        public const int HeaderSize = 17;
         public static Dictionary<ImageFormat, int> FormatToPixelSize { get; } = new()
         {
             { ImageFormat.RawRGBA, 0x04 },
