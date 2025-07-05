@@ -15,16 +15,9 @@ namespace CricCli
             output.Close();
             Console.WriteLine("[Decoder] Fertig.");
         }
-
         public static FileStream Decode(byte[] input, ImageFormat format, FileStream fs)
         {
-            int pixelSize = format switch
-            {
-                ImageFormat.RawRGBA => 4,
-                ImageFormat.RawRGB => 3,
-                ImageFormat.RawGray8 => 1,
-                _ => throw new NotSupportedException($"Format {format} nicht unterstützt")
-            };
+            int pixelSize = FormatHelper.FormatToPixelSize[format];
             int i = 0;
             while (i < input.Length)
             {
@@ -48,37 +41,60 @@ namespace CricCli
             return fs;
         }
 
-        public static byte[] Decode(byte[] input, ImageFormat format)
+        public static byte[] Decode(byte[] input)
         {
-            using var ms = new MemoryStream();
-            int pixelSize = format switch
+            using var inputStream = new MemoryStream(input);
+            using var output = new MemoryStream();
+
+            // Header lesen
+            if ((ByteMarker)inputStream.ReadByte() != ByteMarker.cig)
+                throw new InvalidDataException("Invalid header");
+
+            byte version = (byte)inputStream.ReadByte();
+            byte pixelSize = (byte)inputStream.ReadByte();
+
+            while (inputStream.Position < inputStream.Length)
             {
-                ImageFormat.RawRGBA => 4,
-                ImageFormat.RawRGB => 3,
-                ImageFormat.RawGray8 => 1,
-                _ => throw new NotSupportedException($"Format {format} nicht unterstützt")
-            };
-            int i = 0;
-            while (i < input.Length)
-            {
-                byte b = input[i++];
-                if (b == 0xFF)
+                ByteMarker marker = (ByteMarker)inputStream.ReadByte();
+
+                switch (marker)
                 {
-                    if (i + pixelSize - 1 >= input.Length)
-                    {
-                        Console.WriteLine("[Decoder] Warnung: unvollständige Rohdaten, Abbruch.");
+                    case ByteMarker.std:
+                        byte gray = (byte)inputStream.ReadByte();
+                        for (int i = 0; i < pixelSize; i++)
+                            output.WriteByte(gray);
                         break;
-                    }
-                    ms.Write(input, i, pixelSize);
-                    i += pixelSize;
-                }
-                else
-                {
-                    for (int j = 0; j < pixelSize; j++)
-                        ms.WriteByte(b);
+
+                    case ByteMarker.rle:
+                    case ByteMarker.rle2:
+                        int count = inputStream.ReadByte();
+                        byte[] color = marker == ByteMarker.rle
+                            ? new byte[] { (byte)inputStream.ReadByte() }
+                            : ReadBytes(inputStream, pixelSize);
+                        for (int i = 0; i < count; i++)
+                        {
+                            if (color.Length == 1)
+                                output.WriteByte(color[0]);
+                            else
+                                output.Write(color, 0, pixelSize);
+                        }
+                        break;
+
+                    default:
+                        throw new InvalidDataException($"Unknown or unsupported marker: {marker:X2}");
                 }
             }
-            return ms.ToArray();
+
+            return output.ToArray();
+        }
+
+        private static byte[] ReadBytes(Stream stream, int count)
+        {
+            byte[] buffer = new byte[count];
+            int read = stream.Read(buffer, 0, count);
+            if (read != count)
+                throw new EndOfStreamException("Unexpected end of stream");
+            return buffer;
         }
     }
 }

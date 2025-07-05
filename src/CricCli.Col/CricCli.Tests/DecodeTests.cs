@@ -15,7 +15,7 @@ namespace CricCli.Tests
             var encodedBytes = Encoder.Encode(rawData, format);
 
             var sw = Stopwatch.StartNew();
-            var decodedBytes = Decoder.Decode(encodedBytes, format);
+            var decodedBytes = Decoder.Decode(encodedBytes);
             sw.Stop();
 
             bool isLossless = decodedBytes.Length == rawData.Length;

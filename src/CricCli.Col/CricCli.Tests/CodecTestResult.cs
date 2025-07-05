@@ -9,6 +9,7 @@ namespace CricCli.Tests
         public int Height { get; set; }
 
         public long OriginalSizeBytes { get; set; }
+        public double ExpectedReduction { get; set; }        
         public long EncodedSizeBytes { get; set; }
         public long DecodedSizeBytes { get; set; }
 
@@ -20,7 +21,7 @@ namespace CricCli.Tests
 
         public override string ToString()
         {
-            return $"{Format} | {Width}x{Height} | CR: {CompressionRatio:P2} | Lossless: {IsLossless} | Encode: {EncodeTime.TotalMilliseconds:F1} ms | Decode: {DecodeTime.TotalMilliseconds:F1} ms";
+            return $"{Format} | {Width}x{Height} | ExpectedReduction: {ExpectedReduction:P2} |  CR: {CompressionRatio:P2} | Lossless: {IsLossless} | Encode: {EncodeTime.TotalMilliseconds:F1} ms | Decode: {DecodeTime.TotalMilliseconds:F1} ms";
         }
     }
 

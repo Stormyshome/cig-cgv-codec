@@ -18,87 +18,71 @@ namespace CricCli
 
         public static FileStream Encode(byte[] input, ImageFormat format, FileStream fs)
         {
-            int pixelSize = format switch
-            {
-                ImageFormat.RawRGBA => 4,
-                ImageFormat.RawRGB => 3,
-                ImageFormat.RawGray8 => 1,
-                _ => throw new NotSupportedException($"Format {format} nicht unterstützt")
-            };
-
-            for (int i = 0; i < input.Length; i += pixelSize)
-            {
-                byte r = input[i];
-                byte g = (i + 1 < input.Length) ? input[i + 1] : r;
-                byte b = (i + 2 < input.Length) ? input[i + 2] : r;
-                byte a = (pixelSize == 4 && i + 3 < input.Length) ? input[i + 3] : r;
-
-                bool allEqual = format switch
-                {
-                    ImageFormat.RawRGBA => r == g && g == b && b == a,
-                    ImageFormat.RawRGB => r == g && g == b,
-                    ImageFormat.RawGray8 => true,
-                    _ => false
-                };
-
-                if (allEqual)
-                {
-                    fs.WriteByte(r); // Nur 1 Byte
-                }
-                else
-                {
-                    fs.WriteByte(0xFF);
-                    fs.WriteByte(r);
-                    if (pixelSize > 1) fs.WriteByte(g);
-                    if (pixelSize > 2) fs.WriteByte(b);
-                    if (pixelSize > 3) fs.WriteByte(a);
-                }
-            }
+            fs.Write(Encode(input, format));
             return fs;
         }
 
         public static byte[] Encode(byte[] input, ImageFormat format)
         {
-            // Fix for CS1586: Initialize the array with a size or use a list for dynamic resizing
-            var output = new List<byte>();
+            using var output = new MemoryStream();
 
-            int pixelSize = format switch
+            int pixelSize = FormatHelper.FormatToPixelSize[format];
+
+            // Header
+            output.WriteByte((byte)ByteMarker.cig); // Magic
+            output.WriteByte(0x01);                 // Version
+            output.WriteByte((byte)pixelSize);      // Format info
+
+            int i = 0;
+            while (i < input.Length)
             {
-                ImageFormat.RawRGBA => 4,
-                ImageFormat.RawRGB => 3,
-                ImageFormat.RawGray8 => 1,
-                _ => throw new NotSupportedException($"Format {format} nicht unterstützt")
-            };
-
-            for (int i = 0; i < input.Length; i += pixelSize)
-            {
-                byte r = input[i];
-                byte g = (i + 1 < input.Length) ? input[i + 1] : r;
-                byte b = (i + 2 < input.Length) ? input[i + 2] : r;
-                byte a = (pixelSize == 4 && i + 3 < input.Length) ? input[i + 3] : r;
-
-                bool allEqual = format switch
+                // Check for RLE
+                int runLength = 1;
+                while (i + runLength * pixelSize < input.Length &&
+                       runLength < 255 &&
+                       EqualPixel(input, i, i + runLength * pixelSize, pixelSize))
                 {
-                    ImageFormat.RawRGBA => r == g && g == b && b == a,
-                    ImageFormat.RawRGB => r == g && g == b,
-                    ImageFormat.RawGray8 => true,
-                    _ => false
-                };
+                    runLength++;
+                }
 
-                if (allEqual)
+                if (runLength >= 3)
                 {
-                    output.Add(r); // Nur 1 Byte
+                    bool compressed = IsSingleByteColor(input, i, pixelSize);
+                    output.WriteByte((byte)(compressed ? ByteMarker.rle : ByteMarker.rle2));
+                    output.WriteByte((byte)runLength);
+                    if (compressed)
+                        output.WriteByte(input[i]); // nur 1 Byte
+                    else
+                        output.Write(input, i, pixelSize); // voller Farbwert
+                    i += runLength * pixelSize;
                 }
                 else
                 {
-                    output.Add(0xFF);
-                    output.Add(r);
-                    if (pixelSize > 1) output.Add(g);
-                    if (pixelSize > 2) output.Add(b);
-                    if (pixelSize > 3) output.Add(a);
+                    bool compressed = IsSingleByteColor(input, i, pixelSize);
+                    if (compressed)
+                        output.WriteByte(input[i]);
+                    else
+                        output.WriteByte((byte)ByteMarker.std);
+                        output.Write(input, i, pixelSize);
+                    i += pixelSize;
                 }
             }
+
             return output.ToArray();
+        }
+
+        private static bool EqualPixel(byte[] data, int a, int b, int len)
+        {
+            for (int i = 0; i < len; i++)
+                if (data[a + i] != data[b + i]) return false;
+            return true;
+        }
+
+        private static bool IsSingleByteColor(byte[] data, int index, int pixelSize)
+        {
+            for (int i = 1; i < pixelSize; i++)
+                if (data[index + i] != data[index]) return false;
+            return true;
         }
     }
 }

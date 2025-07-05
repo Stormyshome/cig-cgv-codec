@@ -15,9 +15,12 @@ namespace CricCl.Tests
         {
             // Arrange
             byte[] rawData = RawTestImageBuilder.CreateTestImage(width, height, format, pattern);
-            var sw = Stopwatch.StartNew();
+            var enSw = Stopwatch.StartNew();
             var encodedBytes = Encoder.Encode(rawData, format);
-            sw.Stop();
+            enSw.Stop();
+            var deSw = Stopwatch.StartNew();
+            var decodedBytes = Decoder.Decode(encodedBytes);
+            deSw.Stop();
 
             var result = new CodecTestResult
             {
@@ -25,13 +28,23 @@ namespace CricCl.Tests
                 Width = width,
                 Height = height,
                 OriginalSizeBytes = rawData.Length,
+                ExpectedReduction = expectedReduction,
                 EncodedSizeBytes = encodedBytes.Length,
-                EncodeTime = sw.Elapsed,
-                IsLossless = Decoder.Decode(encodedBytes, format).SequenceEqual(rawData) // vorläufige Prüfung, ersetze später durch echten Decode
+                EncodeTime = enSw.Elapsed,
+                DecodedSizeBytes = decodedBytes.Length,
+                DecodeTime = deSw.Elapsed,
+                IsLossless = decodedBytes.SequenceEqual(rawData) 
             };
-
+            if(result.IsLossless)
+            {
+                Debugger.Break(); // Setze auf Originalgröße, wenn verlustfrei
+            }
+            else
+            {
+                Debugger.Break(); // Setze auf kodierte Größe, wenn nicht verlustfrei
+            }
             TestSummaryWriter.AddResult(result);
-
+            
             // Assert
             Assert.NotEmpty(encodedBytes);
             Assert.True(result.IsLossless, $"Kodierung für {format} ist nicht verlustfrei. Erwartet: {rawData.Length} Bytes, erhalten: {encodedBytes.Length} Bytes.");
