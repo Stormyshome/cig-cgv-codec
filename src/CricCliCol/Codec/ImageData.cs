@@ -34,7 +34,7 @@ namespace CricCli
                 Width = (ushort)width,
                 Height = (ushort)height,
                 PixelSize = (byte)FormatHelper.FormatToPixelSize[format],
-                DataStartIndex = Header.GetSize(),
+                DataStartIndex = ImageHeader.GetSize(),
                 FirstStdIndex = -1, // Not set yet
                 Reserved = 0 // Reserved for future use
             };

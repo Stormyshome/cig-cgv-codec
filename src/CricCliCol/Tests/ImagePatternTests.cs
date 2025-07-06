@@ -1,53 +1,65 @@
-﻿using System.Diagnostics;
+﻿using CricCli;
+using CricCli.Tests;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Tests;
 using Xunit;
-using CricCli;
-using CricCli.Tests;
 
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 namespace CricCl.Tests
 {
+    [CollectionDefinition("TestSummaryCollection")]
+    public class TestSummaryCollection : ICollectionFixture<TestSummaryWriter>
+    {
+        // Leerer Marker – nur für xUnit-Verknüpfung
+    }
+    [Collection("TestSummaryCollection")]
     public class ImagePatternTests
     {
         [Theory]
         [MemberData(nameof(TestMatrix.AllCases), MemberType = typeof(TestMatrix))]
         public void RunTest(ImageFormat format, int width, int height, TestPattern pattern, double expectedReduction)
         {
+            TestSummaryWriter testSummary = new TestSummaryWriter();
             // Arrange
             byte[] rawData = RawTestImageBuilder.CreateTestImage(width, height, format, pattern);
             var enSw = Stopwatch.StartNew();
-            var encodedBytes = Encoder.Encode(rawData, format);
+            var encodedBytes = Encoder.Encode(rawData, format, width, height);
             enSw.Stop();
             var deSw = Stopwatch.StartNew();
             var decodedBytes = Decoder.Decode(encodedBytes);
             deSw.Stop();
-
+            bool isEqual = ByteArrayComparer.Compare(rawData, decodedBytes, out string debugMsg);
+            if (!isEqual)
+            {
+                Console.WriteLine(debugMsg);
+                Debugger.Break();
+            }
+            
             var result = new CodecTestResult
             {
                 Format = format,
+                Pattern = pattern,
                 Width = width,
                 Height = height,
                 OriginalSizeBytes = rawData.Length,
                 ExpectedReduction = expectedReduction,
-                EncodedSizeBytes = encodedBytes.Length,
+                EncodedSizeBytes = encodedBytes.Length - ImageHeader.GetSize(),
                 EncodeTime = enSw.Elapsed,
                 DecodedSizeBytes = decodedBytes.Length,
                 DecodeTime = deSw.Elapsed,
-                IsLossless = decodedBytes.SequenceEqual(rawData) 
+                IsLossless = isEqual
             };
-            if(result.IsLossless)
+            if(!result.IsLossless)
             {
-                Debugger.Break(); // Setze auf Originalgröße, wenn verlustfrei
+                Console.WriteLine(debugMsg);
             }
-            else
-            {
-                Debugger.Break(); // Setze auf kodierte Größe, wenn nicht verlustfrei
-            }
-            TestSummaryWriter.AddResult(result);
-            
+            testSummary.AddResult(result);
             // Assert
             Assert.NotEmpty(encodedBytes);
-            Assert.True(result.IsLossless, $"Kodierung für {format} ist nicht verlustfrei. Erwartet: {rawData.Length} Bytes, erhalten: {encodedBytes.Length} Bytes.");
+            Assert.True(result.IsLossless, $"Kodierung für {format} ist nicht verlustfrei. Erwartet: {rawData.Length} Bytes, erhalten: {decodedBytes.Length} Bytes.");
+            
         }
     }
 }

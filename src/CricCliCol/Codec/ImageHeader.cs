@@ -17,7 +17,7 @@ namespace CricCli
         public int FirstStdIndex { get; set; }       // first 0xFF (standard pixel) index
         public byte Reserved { get; set; }           // for extensions
 
-        public int GetSize()
+        public static int GetSize()
         {
             return sizeof(byte)      // Magic
                  + sizeof(byte)      // Version
@@ -29,8 +29,21 @@ namespace CricCli
                  + sizeof(byte);     // Reserved
         }
     }
+
     public static class ImageHeaderHelper
     {
+        public static void WriteHeader(Stream stream, ImageHeader header)
+        {
+            BinaryWriter writer = new(stream);
+            writer.Write(header.Magic);
+            writer.Write(header.Version);
+            writer.Write(header.Width);
+            writer.Write(header.Height);
+            writer.Write(header.PixelSize);
+            writer.Write(header.DataStartIndex);
+            writer.Write(header.FirstStdIndex);
+            writer.Write(header.Reserved);
+        }
         public static ImageHeader ReadHeader(Stream stream)
         {
             BinaryReader reader = new(stream);

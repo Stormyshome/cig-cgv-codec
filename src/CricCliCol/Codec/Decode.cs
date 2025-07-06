@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 
 namespace CricCli
@@ -63,35 +64,38 @@ namespace CricCli
                 switch ((ByteMarker)marker)
                 {
                     case ByteMarker.std:
-                        byte[] stdPixel = ReadBytes(inputStream, pixelSize);
-                        output.Write(stdPixel, 0, pixelSize);
-                        break;
-
-                    case ByteMarker.rle:
-                    case ByteMarker.rle2:
-                        int count = inputStream.ReadByte();
-                        byte[] color = marker == (byte)ByteMarker.rle
-                            ? new byte[pixelSize].Select(_ => inputStream.ReadByte()).ToArray()
-                            : ReadBytes(inputStream, pixelSize);
-                        for (int i = 0; i < count; i++)
-                            output.Write(color, 0, pixelSize);
-                        break;
-
-                    default:
-                        // 📌 Kein Marker – also: entweder Einzelpixel (gleiche RGB) oder Datenfehler
-                        if (marker <= 0xF0)  // Nur wenn sinnvoll definiert
+                        if (inputStream.Position < header.FirstStdIndex)
                         {
+                            byte stdPixel = (byte)inputStream.ReadByte();
                             for (int j = 0; j < pixelSize; j++)
-                                output.WriteByte(marker);
+                                output.WriteByte(stdPixel);                   
                         }
                         else
                         {
-                            throw new InvalidDataException($"Unknown or unsupported marker: 0x{marker:X2}");
+                            byte[] stdPixel = ReadBytes(inputStream, pixelSize);
+                            output.Write(stdPixel, 0, pixelSize);
                         }
+                        break;
+                    case ByteMarker.rle:
+                        int rleCount = inputStream.ReadByte();
+                        byte rleColor = (byte)inputStream.ReadByte();
+                        for (int i = 0; i < rleCount; i++)
+                        {
+                            for (int j = 0; j < pixelSize; j++)
+                                output.WriteByte(rleColor);
+                        }
+                        break;
+                    case ByteMarker.rle2:
+                        int rle2Count = inputStream.ReadByte();
+                        byte[] rle2Color = ReadBytes(inputStream, pixelSize);
+                        for (int i = 0; i < rle2Count; i++)
+                            output.Write(rle2Color, 0, pixelSize);
+                        break;
+                    default:
+                        output.WriteByte(marker);
                         break;
                 }
             }
-
             return output.ToArray();
         }
 
