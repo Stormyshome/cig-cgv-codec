@@ -1,0 +1,650 @@
+<table class="dataframe cric-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Format</th>
+      <th>Pattern</th>
+      <th>Size</th>
+      <th>Original</th>
+      <th>Encoded</th>
+      <th>Decoded</th>
+      <th>ExpectedReduction</th>
+      <th>CalculatedReduction</th>
+      <th>IsLossless</th>
+      <th>EncodeMs</th>
+      <th>DecodeMs</th>
+      <th>CalculatedReductionValue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Gradient"</td>
+      <td>"32x32"</td>
+      <td>4096</td>
+      <td>5120</td>
+      <td>4096</td>
+      <td>5.00 %</td>
+      <td>-25.00 %</td>
+      <td>"True"</td>
+      <td>0.808</td>
+      <td>0.438</td>
+      <td>-25.00</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Black"</td>
+      <td>"128x128"</td>
+      <td>16384</td>
+      <td>195</td>
+      <td>16384</td>
+      <td>50.00 %</td>
+      <td>98.81 %</td>
+      <td>"True"</td>
+      <td>0.104</td>
+      <td>0.077</td>
+      <td>98.81</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Black"</td>
+      <td>"64x64"</td>
+      <td>12288</td>
+      <td>51</td>
+      <td>12288</td>
+      <td>50.00 %</td>
+      <td>99.58 %</td>
+      <td>"True"</td>
+      <td>0.044</td>
+      <td>0.059</td>
+      <td>99.58</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Gradient"</td>
+      <td>"128x128"</td>
+      <td>16384</td>
+      <td>16384</td>
+      <td>16256</td>
+      <td>5.00 %</td>
+      <td>0.00 %</td>
+      <td>"False"</td>
+      <td>0.222</td>
+      <td>0.140</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"White"</td>
+      <td>"32x32"</td>
+      <td>4096</td>
+      <td>15</td>
+      <td>4096</td>
+      <td>50.00 %</td>
+      <td>99.63 %</td>
+      <td>"True"</td>
+      <td>0.015</td>
+      <td>0.019</td>
+      <td>99.63</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Black"</td>
+      <td>"128x128"</td>
+      <td>65536</td>
+      <td>390</td>
+      <td>65536</td>
+      <td>50.00 %</td>
+      <td>99.40 %</td>
+      <td>"True"</td>
+      <td>0.203</td>
+      <td>0.132</td>
+      <td>99.40</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Black"</td>
+      <td>"32x32"</td>
+      <td>3072</td>
+      <td>15</td>
+      <td>3072</td>
+      <td>50.00 %</td>
+      <td>99.51 %</td>
+      <td>"True"</td>
+      <td>0.012</td>
+      <td>0.016</td>
+      <td>99.51</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Black"</td>
+      <td>"32x32"</td>
+      <td>1024</td>
+      <td>15</td>
+      <td>1024</td>
+      <td>50.00 %</td>
+      <td>98.54 %</td>
+      <td>"True"</td>
+      <td>0.007</td>
+      <td>0.007</td>
+      <td>98.54</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Gradient"</td>
+      <td>"128x128"</td>
+      <td>49152</td>
+      <td>16384</td>
+      <td>16512</td>
+      <td>5.00 %</td>
+      <td>66.67 %</td>
+      <td>"False"</td>
+      <td>0.293</td>
+      <td>0.146</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Gray"</td>
+      <td>"128x128"</td>
+      <td>16384</td>
+      <td>195</td>
+      <td>16384</td>
+      <td>25.00 %</td>
+      <td>98.81 %</td>
+      <td>"True"</td>
+      <td>0.096</td>
+      <td>0.075</td>
+      <td>98.81</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Gray"</td>
+      <td>"64x64"</td>
+      <td>4096</td>
+      <td>51</td>
+      <td>4096</td>
+      <td>25.00 %</td>
+      <td>98.75 %</td>
+      <td>"True"</td>
+      <td>0.025</td>
+      <td>0.024</td>
+      <td>98.75</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Black"</td>
+      <td>"32x32"</td>
+      <td>4096</td>
+      <td>30</td>
+      <td>4096</td>
+      <td>50.00 %</td>
+      <td>99.27 %</td>
+      <td>"True"</td>
+      <td>0.013</td>
+      <td>0.011</td>
+      <td>99.27</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"White"</td>
+      <td>"128x128"</td>
+      <td>65536</td>
+      <td>195</td>
+      <td>65536</td>
+      <td>50.00 %</td>
+      <td>99.70 %</td>
+      <td>"True"</td>
+      <td>0.203</td>
+      <td>0.279</td>
+      <td>99.70</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Gradient"</td>
+      <td>"64x64"</td>
+      <td>4096</td>
+      <td>4096</td>
+      <td>4352</td>
+      <td>5.00 %</td>
+      <td>0.00 %</td>
+      <td>"False"</td>
+      <td>0.060</td>
+      <td>0.045</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Gray"</td>
+      <td>"64x64"</td>
+      <td>12288</td>
+      <td>51</td>
+      <td>12288</td>
+      <td>25.00 %</td>
+      <td>99.58 %</td>
+      <td>"True"</td>
+      <td>0.045</td>
+      <td>0.060</td>
+      <td>99.58</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Checker"</td>
+      <td>"128x128"</td>
+      <td>16384</td>
+      <td>6099</td>
+      <td>16384</td>
+      <td>30.00 %</td>
+      <td>62.77 %</td>
+      <td>"True"</td>
+      <td>0.149</td>
+      <td>0.144</td>
+      <td>62.77</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Checker"</td>
+      <td>"64x64"</td>
+      <td>4096</td>
+      <td>1515</td>
+      <td>4096</td>
+      <td>30.00 %</td>
+      <td>63.01 %</td>
+      <td>"True"</td>
+      <td>0.037</td>
+      <td>0.033</td>
+      <td>63.01</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"White"</td>
+      <td>"128x128"</td>
+      <td>16384</td>
+      <td>195</td>
+      <td>16384</td>
+      <td>50.00 %</td>
+      <td>98.81 %</td>
+      <td>"True"</td>
+      <td>0.097</td>
+      <td>0.082</td>
+      <td>98.81</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Black"</td>
+      <td>"128x128"</td>
+      <td>49152</td>
+      <td>195</td>
+      <td>49152</td>
+      <td>50.00 %</td>
+      <td>99.60 %</td>
+      <td>"True"</td>
+      <td>0.175</td>
+      <td>0.217</td>
+      <td>99.60</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Gradient"</td>
+      <td>"128x128"</td>
+      <td>65536</td>
+      <td>81920</td>
+      <td>65536</td>
+      <td>5.00 %</td>
+      <td>-25.00 %</td>
+      <td>"True"</td>
+      <td>0.476</td>
+      <td>0.697</td>
+      <td>-25.00</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Gray"</td>
+      <td>"128x128"</td>
+      <td>49152</td>
+      <td>195</td>
+      <td>49152</td>
+      <td>25.00 %</td>
+      <td>99.60 %</td>
+      <td>"True"</td>
+      <td>0.172</td>
+      <td>0.214</td>
+      <td>99.60</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"White"</td>
+      <td>"128x128"</td>
+      <td>49152</td>
+      <td>195</td>
+      <td>49152</td>
+      <td>50.00 %</td>
+      <td>99.60 %</td>
+      <td>"True"</td>
+      <td>0.171</td>
+      <td>0.223</td>
+      <td>99.60</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"White"</td>
+      <td>"64x64"</td>
+      <td>12288</td>
+      <td>51</td>
+      <td>12288</td>
+      <td>50.00 %</td>
+      <td>99.58 %</td>
+      <td>"True"</td>
+      <td>0.043</td>
+      <td>0.058</td>
+      <td>99.58</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Gray"</td>
+      <td>"32x32"</td>
+      <td>1024</td>
+      <td>15</td>
+      <td>1024</td>
+      <td>25.00 %</td>
+      <td>98.54 %</td>
+      <td>"True"</td>
+      <td>0.007</td>
+      <td>0.009</td>
+      <td>98.54</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Checker"</td>
+      <td>"128x128"</td>
+      <td>65536</td>
+      <td>9147</td>
+      <td>65536</td>
+      <td>30.00 %</td>
+      <td>86.04 %</td>
+      <td>"True"</td>
+      <td>0.291</td>
+      <td>0.273</td>
+      <td>86.04</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Checker"</td>
+      <td>"32x32"</td>
+      <td>1024</td>
+      <td>375</td>
+      <td>1024</td>
+      <td>30.00 %</td>
+      <td>63.38 %</td>
+      <td>"True"</td>
+      <td>0.012</td>
+      <td>0.007</td>
+      <td>63.38</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"White"</td>
+      <td>"64x64"</td>
+      <td>4096</td>
+      <td>51</td>
+      <td>4096</td>
+      <td>50.00 %</td>
+      <td>98.75 %</td>
+      <td>"True"</td>
+      <td>0.025</td>
+      <td>0.021</td>
+      <td>98.75</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Gray"</td>
+      <td>"64x64"</td>
+      <td>16384</td>
+      <td>102</td>
+      <td>16384</td>
+      <td>25.00 %</td>
+      <td>99.38 %</td>
+      <td>"True"</td>
+      <td>0.052</td>
+      <td>0.040</td>
+      <td>99.38</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Gray"</td>
+      <td>"128x128"</td>
+      <td>65536</td>
+      <td>390</td>
+      <td>65536</td>
+      <td>25.00 %</td>
+      <td>99.40 %</td>
+      <td>"True"</td>
+      <td>0.206</td>
+      <td>0.150</td>
+      <td>99.40</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"White"</td>
+      <td>"64x64"</td>
+      <td>16384</td>
+      <td>51</td>
+      <td>16384</td>
+      <td>50.00 %</td>
+      <td>99.69 %</td>
+      <td>"True"</td>
+      <td>0.052</td>
+      <td>0.076</td>
+      <td>99.69</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Black"</td>
+      <td>"64x64"</td>
+      <td>16384</td>
+      <td>102</td>
+      <td>16384</td>
+      <td>50.00 %</td>
+      <td>99.38 %</td>
+      <td>"True"</td>
+      <td>0.052</td>
+      <td>0.042</td>
+      <td>99.38</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Gray"</td>
+      <td>"32x32"</td>
+      <td>4096</td>
+      <td>30</td>
+      <td>4096</td>
+      <td>25.00 %</td>
+      <td>99.27 %</td>
+      <td>"True"</td>
+      <td>0.014</td>
+      <td>0.007</td>
+      <td>99.27</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Checker"</td>
+      <td>"64x64"</td>
+      <td>16384</td>
+      <td>2271</td>
+      <td>16384</td>
+      <td>30.00 %</td>
+      <td>86.14 %</td>
+      <td>"True"</td>
+      <td>0.071</td>
+      <td>3.254</td>
+      <td>86.14</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Gray"</td>
+      <td>"32x32"</td>
+      <td>3072</td>
+      <td>15</td>
+      <td>3072</td>
+      <td>25.00 %</td>
+      <td>99.51 %</td>
+      <td>"True"</td>
+      <td>0.013</td>
+      <td>0.013</td>
+      <td>99.51</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"White"</td>
+      <td>"32x32"</td>
+      <td>3072</td>
+      <td>15</td>
+      <td>3072</td>
+      <td>50.00 %</td>
+      <td>99.51 %</td>
+      <td>"True"</td>
+      <td>0.011</td>
+      <td>0.012</td>
+      <td>99.51</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Gradient"</td>
+      <td>"32x32"</td>
+      <td>1024</td>
+      <td>1024</td>
+      <td>1024</td>
+      <td>5.00 %</td>
+      <td>0.00 %</td>
+      <td>"True"</td>
+      <td>0.014</td>
+      <td>0.009</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Gradient"</td>
+      <td>"32x32"</td>
+      <td>3072</td>
+      <td>1024</td>
+      <td>1024</td>
+      <td>5.00 %</td>
+      <td>66.67 %</td>
+      <td>"False"</td>
+      <td>0.019</td>
+      <td>0.008</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Gradient"</td>
+      <td>"64x64"</td>
+      <td>16384</td>
+      <td>20480</td>
+      <td>16384</td>
+      <td>5.00 %</td>
+      <td>-25.00 %</td>
+      <td>"True"</td>
+      <td>0.112</td>
+      <td>0.145</td>
+      <td>-25.00</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Gradient"</td>
+      <td>"64x64"</td>
+      <td>12288</td>
+      <td>4096</td>
+      <td>5120</td>
+      <td>5.00 %</td>
+      <td>66.67 %</td>
+      <td>"False"</td>
+      <td>0.073</td>
+      <td>0.038</td>
+      <td>66.67</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Checker"</td>
+      <td>"32x32"</td>
+      <td>3072</td>
+      <td>375</td>
+      <td>3072</td>
+      <td>30.00 %</td>
+      <td>87.79 %</td>
+      <td>"True"</td>
+      <td>0.015</td>
+      <td>0.015</td>
+      <td>87.79</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Checker"</td>
+      <td>"64x64"</td>
+      <td>12288</td>
+      <td>1515</td>
+      <td>12288</td>
+      <td>30.00 %</td>
+      <td>87.67 %</td>
+      <td>"True"</td>
+      <td>0.054</td>
+      <td>0.053</td>
+      <td>87.67</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"Black"</td>
+      <td>"64x64"</td>
+      <td>4096</td>
+      <td>51</td>
+      <td>4096</td>
+      <td>50.00 %</td>
+      <td>98.75 %</td>
+      <td>"True"</td>
+      <td>0.024</td>
+      <td>0.019</td>
+      <td>98.75</td>
+    </tr>
+    <tr>
+      <td>RawRGB</td>
+      <td>"Checker"</td>
+      <td>"128x128"</td>
+      <td>49152</td>
+      <td>6099</td>
+      <td>49152</td>
+      <td>30.00 %</td>
+      <td>87.59 %</td>
+      <td>"True"</td>
+      <td>0.213</td>
+      <td>0.254</td>
+      <td>87.59</td>
+    </tr>
+    <tr>
+      <td>RawRGBA</td>
+      <td>"Checker"</td>
+      <td>"32x32"</td>
+      <td>4096</td>
+      <td>561</td>
+      <td>4096</td>
+      <td>30.00 %</td>
+      <td>86.30 %</td>
+      <td>"True"</td>
+      <td>0.019</td>
+      <td>0.015</td>
+      <td>86.30</td>
+    </tr>
+    <tr>
+      <td>RawGray8</td>
+      <td>"White"</td>
+      <td>"32x32"</td>
+      <td>1024</td>
+      <td>15</td>
+      <td>1024</td>
+      <td>50.00 %</td>
+      <td>98.54 %</td>
+      <td>"True"</td>
+      <td>0.007</td>
+      <td>0.006</td>
+      <td>98.54</td>
+    </tr>
+  </tbody>
+</table>
