@@ -1,49 +1,55 @@
 <!DOCTYPE html>
-
 <html lang="de">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CRIC Codec – verlustfreier Bild- und Videocodec</title>
-<link href="static/index.css" rel="stylesheet"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRIC Codec</title>
+    <link rel="stylesheet" href="index.css" />
 </head>
 <body>
-<nav class="navbar">
-<ul>
-<li><a href="#home">Home</a></li>
-<li class="dropdown">
-<a class="dropbtn" href="#tests">Tests</a>
-<div class="dropdown-content">
-<a href="#patterns">Patterns</a>
-<a href="#compare">Compare</a>
-</div>
-</li>
-</ul>
-</nav>
-
-<h1>CRIC Codec</h1>
-<p><strong>CRIC</strong> ist ein verlustfreier, ultraschneller Bild- und Videocodec – optimiert für Graustufen, einfache Farbdaten und Streaming-Anwendungen.</p>
-<h2>🔧 Dateiformate</h2>
-<ul>
-<li><code>.cig</code> – CRIC Image Format (Einzelbilder)</li>
-<li><code>.cgv</code> – CRIC Gray Video Format (Videos / Streams)</li>
-</ul>
-<h2>🚀 Vorteile</h2>
-<ul>
-<li>100 % verlustfrei</li>
-<li>Lineare Verarbeitungsgeschwindigkeit (O(n))</li>
-<li>Ideal für Kamerastreams, Embedded Vision, Low-Latency-Systeme</li>
-<li>Kein Entropie-Overhead, keine Huffman-Tabellen</li>
-</ul>
-<h2>📥 Download</h2>
-<p><a class="button" href="https://github.com/Stormyshome/cig-cgv-codec/releases">CRIC Encoder/Decoder herunterladen</a></p>
-<h2>📄 Dokumentation</h2>
-<p>Technische Details findest du hier: <a href="https://github.com/Stormyshome/cig-cgv-codec/blob/main/docs/spec.md">spec.md</a></p>
-<h2>💰 Unterstützen</h2>
-<p>Hilf mit, dieses Projekt weiterzuentwickeln:</p>
-<p><a class="button donate" href="https://paypal.me/Stormyshome">Jetzt via PayPal spenden</a></p>
-<footer>
-    Made with 💡 by Chris · <a href="https://github.com/Stormyshome/cig-cgv-codec">Projekt auf GitHub</a>
-</footer>
+    <header>
+        <nav class="navbar">
+            <ul class="nav-left">
+                <li><a href="#" onclick="showSection('home')">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Tests</a>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="showSection('patterns')">Patterns</a>
+                        <a href="#" onclick="showSection('compare')">Compare</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main-container">
+        <aside class="sidebar">
+            <h3>Links</h3>
+            <ul>
+                <li><a href="https://github.com/Stormyshome/cig-cgv-codec" target="_blank">GitHub</a></li>
+                <li><a href="https://stormyshome.github.io/cig-cgv-codec/" target="_blank">Dokumentation</a></li>
+                <li><a href="https://paypal.me/stormyshome" target="_blank">Unterstützen (PayPal)</a></li>
+            </ul>
+        </aside>
+        <main class="content">
+            <section id="home">
+                <h1>CRIC – Ein ultraleichter, ultraschneller Bild- und Videocodec</h1>
+                <p>Optimiert für Geschwindigkeit, einfache Einbindung und kleine Dateigrößen.</p>
+            </section>
+            <section id="patterns" style="display: none;">
+                <h2>Testmuster-Auswertung</h2>
+                <p>Hier folgt die Analyse der Pattern-basierten Benchmarktests.</p>
+            </section>
+            <section id="compare" style="display: none;">
+                <h2>Vergleich mit anderen Codecs</h2>
+                <p>Detaillierte Vergleiche mit z. B. PNG, WebP, JPEG oder AVIF werden hier eingebunden.</p>
+            </section>
+        </main>
+    </div>
+    <script>
+        function showSection(id) {
+            document.querySelectorAll("main section").forEach(sec => sec.style.display = "none");
+            document.getElementById(id).style.display = "block";
+        }
+    </script>
 </body>
 </html>
