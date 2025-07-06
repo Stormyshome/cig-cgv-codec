@@ -1,56 +1,49 @@
 <!DOCTYPE html>
+
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRIC Codec – verlustfreier Bild- und Videocodec</title>
-  <link rel="stylesheet" href="static/index.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CRIC Codec – verlustfreier Bild- und Videocodec</title>
+<link href="static/index.css" rel="stylesheet"/>
 </head>
 <body>
-  <h1>CRIC Codec</h1>
-  <p><strong>CRIC</strong> ist ein verlustfreier, ultraschneller Bild- und Videocodec – optimiert für Graustufen, einfache Farbdaten und Streaming-Anwendungen.</p>
+<nav class="navbar">
+<ul>
+<li><a href="#home">Home</a></li>
+<li class="dropdown">
+<a class="dropbtn" href="#tests">Tests</a>
+<div class="dropdown-content">
+<a href="#patterns">Patterns</a>
+<a href="#compare">Compare</a>
+</div>
+</li>
+</ul>
+</nav>
 
-  <h2>🔧 Dateiformate</h2>
-  <ul>
-    <li><code>.cig</code> – CRIC Image Format (Einzelbilder)</li>
-    <li><code>.cgv</code> – CRIC Gray Video Format (Videos / Streams)</li>
-  </ul>
-
-  <h2>🚀 Vorteile</h2>
-  <ul>
-    <li>100 % verlustfrei</li>
-    <li>Lineare Verarbeitungsgeschwindigkeit (O(n))</li>
-    <li>Ideal für Kamerastreams, Embedded Vision, Low-Latency-Systeme</li>
-    <li>Kein Entropie-Overhead, keine Huffman-Tabellen</li>
-  </ul>
-
-  <h2>📥 Download</h2>
-  <p><a class="button" href="https://github.com/Stormyshome/cig-cgv-codec/releases">CRIC Encoder/Decoder herunterladen</a></p>
-
-  <h2>📄 Dokumentation</h2>
-  <p>Technische Details findest du hier: <a href="https://github.com/Stormyshome/cig-cgv-codec/blob/main/docs/spec.md">spec.md</a></p>
-
-  <h2>💰 Unterstützen</h2>
-  <p>Hilf mit, dieses Projekt weiterzuentwickeln:</p>
-  <p><a class="button donate" href="https://paypal.me/Stormyshome">Jetzt via PayPal spenden</a></p>
-
-  <footer>
+<h1>CRIC Codec</h1>
+<p><strong>CRIC</strong> ist ein verlustfreier, ultraschneller Bild- und Videocodec – optimiert für Graustufen, einfache Farbdaten und Streaming-Anwendungen.</p>
+<h2>🔧 Dateiformate</h2>
+<ul>
+<li><code>.cig</code> – CRIC Image Format (Einzelbilder)</li>
+<li><code>.cgv</code> – CRIC Gray Video Format (Videos / Streams)</li>
+</ul>
+<h2>🚀 Vorteile</h2>
+<ul>
+<li>100 % verlustfrei</li>
+<li>Lineare Verarbeitungsgeschwindigkeit (O(n))</li>
+<li>Ideal für Kamerastreams, Embedded Vision, Low-Latency-Systeme</li>
+<li>Kein Entropie-Overhead, keine Huffman-Tabellen</li>
+</ul>
+<h2>📥 Download</h2>
+<p><a class="button" href="https://github.com/Stormyshome/cig-cgv-codec/releases">CRIC Encoder/Decoder herunterladen</a></p>
+<h2>📄 Dokumentation</h2>
+<p>Technische Details findest du hier: <a href="https://github.com/Stormyshome/cig-cgv-codec/blob/main/docs/spec.md">spec.md</a></p>
+<h2>💰 Unterstützen</h2>
+<p>Hilf mit, dieses Projekt weiterzuentwickeln:</p>
+<p><a class="button donate" href="https://paypal.me/Stormyshome">Jetzt via PayPal spenden</a></p>
+<footer>
     Made with 💡 by Chris · <a href="https://github.com/Stormyshome/cig-cgv-codec">Projekt auf GitHub</a>
-  </footer>
-
-<section>
-  <h2>📊 Benchmarks</h2>
-
-  <h3>Top 10 – Schnellste Kodierung</h3>
-  <img src="static/top_encode_chart.png" alt="Schnellste Kodierung" class="benchmark-image">
-
-  <h3>Top 10 – Beste Kompression</h3>
-  <img src="static/top_reduction_chart.png" alt="Beste Kompression" class="benchmark-image">
-
-  <h3>Alle Testfälle</h3>
-  <iframe src="static/test_summary_table.html" width="100%" height="600" style="border: none;"></iframe>
-</section>
-</main>
-
+</footer>
 </body>
 </html>
